@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Moral Compass — A Test Built From Philosophy's Greatest Thought Experiments</title>
+<style>
+  :root{
+    --bg:#14110f;
+    --surface:#1e1a17;
+    --surface-2:#26211d;
+    --line:#3a332d;
+    --text:#ece6dd;
+    --muted:#a89f93;
+    --faint:#7a7064;
+    --accent:#e3b15a;
+    --accent-soft:#d9a441;
+    /* framework colours */
+    --c-cons:#e08a3c;
+    --c-deon:#5b8dd6;
+    --c-just:#5cb88a;
+    --c-ideal:#b07cd6;
+    --c-ego:#d96c6c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:radial-gradient(120% 100% at 50% 0%, #1a1613 0%, var(--bg) 60%);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding:28px 18px 80px;
+  }
+  .wrap{max-width:660px;margin:0 auto}
+  .serif{font-family:Georgia,"Times New Roman",serif}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;line-height:1.25}
+
+  /* ---------- intro ---------- */
+  .hero{text-align:center;padding:42px 6px 10px}
+  .kicker{letter-spacing:.28em;text-transform:uppercase;font-size:12px;color:var(--accent);margin-bottom:18px}
+  .hero h1{font-size:38px;letter-spacing:.5px}
+  .hero p.lede{color:var(--muted);font-size:17px;margin:18px auto 0;max-width:520px}
+  .meta-row{display:flex;gap:26px;justify-content:center;margin:30px 0 6px;flex-wrap:wrap;color:var(--faint);font-size:13px}
+  .meta-row b{color:var(--text);font-weight:600}
+
+  .btn{
+    display:inline-block;border:none;cursor:pointer;font:inherit;
+    background:var(--accent);color:#1a130a;font-weight:600;
+    padding:14px 30px;border-radius:999px;font-size:16px;
+    transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+    box-shadow:0 6px 22px rgba(227,177,90,.22);
+  }
+  .btn:hover{transform:translateY(-1px);background:#eec072;box-shadow:0 10px 28px rgba(227,177,90,.30)}
+  .btn:active{transform:translateY(0)}
+  .btn.ghost{background:transparent;color:var(--muted);box-shadow:none;border:1px solid var(--line);font-weight:500}
+  .btn.ghost:hover{color:var(--text);background:var(--surface-2)}
+  .center{text-align:center}
+
+  .note{color:var(--faint);font-size:13px;margin-top:18px}
+
+  /* ---------- quiz ---------- */
+  .progress{margin:6px 0 26px}
+  .progress .bar{height:5px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+  .progress .fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent-soft),var(--accent));transition:width .35s ease}
+  .progress .label{display:flex;justify-content:space-between;font-size:12px;color:var(--faint);margin-top:8px;letter-spacing:.04em}
+
+  .card{
+    background:linear-gradient(180deg,var(--surface) 0%, #1a1714 100%);
+    border:1px solid var(--line);border-radius:18px;padding:30px 26px;
+    animation:rise .4s ease both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .q-name{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  .q-text{font-size:22px;line-height:1.4;margin-bottom:6px}
+  .q-text .serif{font-size:22px}
+  .q-sub{color:var(--muted);font-size:15px;margin:10px 0 4px}
+
+  .options{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+  .opt{
+    text-align:left;cursor:pointer;font:inherit;color:var(--text);
+    background:var(--surface-2);border:1px solid var(--line);border-radius:12px;
+    padding:15px 16px 15px 50px;position:relative;font-size:16px;line-height:1.45;
+    transition:border-color .14s ease, background .14s ease, transform .08s ease;
+  }
+  .opt:hover{border-color:var(--accent-soft);background:#2c2620}
+  .opt:active{transform:scale(.995)}
+  .opt .key{
+    position:absolute;left:14px;top:50%;transform:translateY(-50%);
+    width:24px;height:24px;border-radius:6px;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--faint);
+    background:var(--bg);
+  }
+  .opt.sel{border-color:var(--accent);background:#322a1d}
+  .opt.sel .key{background:var(--accent);color:#1a130a;border-color:var(--accent)}
+
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:24px}
+
+  /* ---------- results ---------- */
+  .result-head{text-align:center;padding:8px 0 6px}
+  .result-head .kicker{margin-bottom:12px}
+  .archetype{font-size:34px;margin:4px 0 0}
+  .archetype small{display:block;font-size:15px;color:var(--muted);font-family:-apple-system,system-ui,sans-serif;font-weight:400;margin-top:12px;line-height:1.6}
+  .kin{color:var(--accent);font-size:14px;margin-top:14px;letter-spacing:.02em}
+
+  .section-title{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin:38px 0 16px;border-bottom:1px solid var(--line);padding-bottom:10px}
+
+  .bars{display:flex;flex-direction:column;gap:16px}
+  .barrow .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .barrow .nm{font-weight:600;font-size:15px}
+  .barrow .nm small{display:block;font-weight:400;color:var(--faint);font-size:12.5px;margin-top:2px}
+  .barrow .pct{font-family:Georgia,serif;font-size:16px;color:var(--text)}
+  .barrow .track{height:9px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+  .barrow .val{height:100%;width:0;border-radius:99px;transition:width .9s cubic-bezier(.22,.8,.3,1)}
+
+  .recap{display:flex;flex-direction:column;gap:14px}
+  .recap .item{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .recap .item .h{font-family:Georgia,serif;font-size:17px;margin-bottom:4px}
+  .recap .item .probe{color:var(--muted);font-size:13.5px;margin-bottom:10px}
+  .recap .item .you{font-size:14.5px;display:flex;gap:8px;align-items:flex-start}
+  .recap .item .you .tag{color:var(--accent);font-weight:600;white-space:nowrap}
+
+  .footer-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:40px}
+  .disclaim{color:var(--faint);font-size:12.5px;text-align:center;margin-top:26px;line-height:1.6;max-width:520px;margin-left:auto;margin-right:auto}
+
+  .hidden{display:none}
+  @media (max-width:480px){
+    .hero h1{font-size:30px}
+    .q-text,.q-text .serif{font-size:20px}
+    .archetype{font-size:28px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ INTRO ============ -->
+  <section id="intro">
+    <div class="hero">
+      <div class="kicker">A Test of Moral Character</div>
+      <h1>The Moral Compass</h1>
+      <p class="lede">Twelve of the most famous thought experiments in the history of philosophy — the trolley, the ring, the machine, the veil. Read each dilemma, answer honestly, and discover which moral tradition your instincts belong to.</p>
+      <div class="meta-row">
+        <span><b>12</b> dilemmas</span>
+        <span><b>~6</b> minutes</span>
+        <span><b>5</b> moral frameworks</span>
+      </div>
+    </div>
+    <div class="center" style="margin-top:18px">
+      <button class="btn" onclick="start()">Begin the test →</button>
+      <p class="note">There are no right answers — only revealing ones. Tip: press <b>1</b>, <b>2</b>, <b>3</b> to answer with the keyboard.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz" class="hidden">
+    <div class="progress">
+      <div class="bar"><div class="fill" id="fill"></div></div>
+      <div class="label"><span id="qcount">Question 1 of 12</span><span id="qtheme"></span></div>
+    </div>
+    <div id="cardHost"></div>
+    <div class="nav">
+      <button class="btn ghost" id="backBtn" onclick="back()">← Back</button>
+      <span class="note" style="margin:0">Choose the answer closest to your honest instinct.</span>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section id="results" class="hidden"></section>
+
+</div>
+
+<script>
+/* ============================================================
+   DATA — each question is a canonical thought experiment.
+   Scores feed five axes:
+     C  = Consequentialism (outcomes / the greater good)
+     D  = Deontology       (duties, rights, lines you don't cross)
+     J  = Justice          (fairness, contract, the worst-off)
+     Id = Idealism         (truth, virtue, intrinsic worth)
+     E  = Individualism    (self-direction, scepticism of moral absolutes)
+   ============================================================ */
+const QUESTIONS = [
+  {
+    name:"The Trolley Problem",
+    source:"Philippa Foot, 1967",
+    text:"A runaway trolley will kill <b>five</b> people tied to the track. You stand beside a lever. Pull it and the trolley diverts onto a side track — where it will kill <b>one</b> person instead.",
+    sub:"Do you pull the lever?",
+    probe:"The founding dilemma of modern ethics — do the numbers decide, or is there a difference between killing and letting die?",
+    options:[
+      {t:"Pull the lever. Five lives outweigh one.", reveals:"outcome over rule", s:{C:2}},
+      {t:"Don't pull it. I won't choose to kill, even to save more.", reveals:"rule over outcome", s:{D:2}},
+      {t:"I'd pull it — but it would haunt me.", reveals:"torn between the two", s:{C:1,D:1}},
+    ]
+  },
+  {
+    name:"The Footbridge",
+    source:"Judith Jarvis Thomson, 1985",
+    text:"Same runaway trolley, same five lives. This time there's no lever — but a very large stranger stands on a footbridge above the track. If you <b>push him off</b>, his body will stop the trolley and save the five. He will die.",
+    sub:"Do you push him?",
+    probe:"Mathematically identical to the trolley — yet most people who pull the lever refuse to push. Why? It exposes whether using a person as a mere means is its own kind of wrong.",
+    options:[
+      {t:"Push him. The arithmetic hasn't changed — five beat one.", reveals:"consistent consequences", s:{C:2}},
+      {t:"I can't. Shoving a person to his death treats him as a tool.", reveals:"a person is not a means", s:{D:2}},
+      {t:"I'd want to save the five, but I couldn't bring myself to push.", reveals:"the gut resists the math", s:{C:1,D:1}},
+    ]
+  },
+  {
+    name:"The Transplant Surgeon",
+    source:"Foot / Thomson",
+    text:"You are a surgeon. Five patients will die today without transplants — a heart, two kidneys, a liver, a lung. In the waiting room sits one healthy person whose organs are a perfect match for all five.",
+    sub:"Do you harvest the one to save the five?",
+    probe:"Pure utilitarian logic says yes. Almost no one agrees. It shows that rights and trust can outrank the body count.",
+    options:[
+      {t:"Operate. One death, five lives — the same trade as the trolley.", reveals:"the greater good", s:{C:2}},
+      {t:"Never. A doctor may not murder a patient, whatever the gain.", reveals:"some lines are absolute", s:{D:2,J:1}},
+    ]
+  },
+  {
+    name:"The Experience Machine",
+    source:"Robert Nozick, 1974",
+    text:"Scientists offer to plug you into a machine that will give you a lifetime of perfectly convincing, blissful experiences — every dream fulfilled. You'd never know it wasn't real. Once inside, you forget you ever chose it.",
+    sub:"Do you plug in for good?",
+    probe:"If pleasure is all that matters, you should dive in. Hesitating reveals that you value something beyond how life feels — reality itself.",
+    options:[
+      {t:"Plug me in. If it feels perfect, what's the difference?", reveals:"experience is what matters", s:{E:2}},
+      {t:"Stay in reality. I want my life to be true, not just to feel true.", reveals:"truth over pleasure", s:{Id:2}},
+      {t:"I'd visit sometimes, but live mostly in the real world.", reveals:"a foot in each", s:{Id:1,E:1}},
+    ]
+  },
+  {
+    name:"The Ring of Gyges",
+    source:"Plato, ~375 BC",
+    text:"You find a ring that makes you completely invisible. You could take anything, go anywhere, escape any consequence. No one would ever know it was you. No law, no reputation, no eyes upon you.",
+    sub:"Would you still behave morally?",
+    probe:"Plato's challenge: is justice something we value for its own sake, or only because we fear getting caught? Your answer says whether morality is inside you or merely the price of being watched.",
+    options:[
+      {t:"I'd act exactly as I do now. Right is right whether or not anyone sees.", reveals:"morality is intrinsic", s:{Id:2,D:1}},
+      {t:"Honestly? Invisible and unaccountable, I'd bend a lot of rules.", reveals:"morality needs witnesses", s:{E:2}},
+      {t:"I'd resist most temptations, but I'm not made of stone.", reveals:"mostly principled", s:{Id:1}},
+    ]
+  },
+  {
+    name:"The Drowning Child",
+    source:"Peter Singer, 1972",
+    text:"You pass a shallow pond where a child is drowning. Wading in will ruin your expensive clothes but save her — obviously you do it. Singer then asks: a donation could save a child's life across the world just as surely. The cost to you is similar.",
+    sub:"Are you equally obligated to give?",
+    probe:"It attacks the comfort of distance. If proximity doesn't change a life's worth, our everyday spending starts to look very different.",
+    options:[
+      {t:"Yes — a life is a life, near or far. I'm obligated to help.", reveals:"distance is morally irrelevant", s:{C:2,J:1}},
+      {t:"I'd save the child at my feet, but distant strangers aren't my duty.", reveals:"closeness creates duty", s:{E:1}},
+      {t:"I owe something, but not without limit.", reveals:"bounded obligation", s:{C:1}},
+    ]
+  },
+  {
+    name:"The Veil of Ignorance",
+    source:"John Rawls, 1971",
+    text:"You get to design the rules of society from scratch — but behind a 'veil': you don't know who you'll be born as. Richest or poorest, healthiest or sickest, most or least lucky. You could land anywhere.",
+    sub:"How do you build it?",
+    probe:"Rawls' test for fairness. Stripped of self-interest, do you protect the worst-off (just in case it's you), or gamble on the highest average?",
+    options:[
+      {t:"Protect the worst-off — make it bearable even for its least lucky member.", reveals:"fairness first", s:{J:2}},
+      {t:"Maximize the total prosperity, even if that means inequality.", reveals:"aggregate welfare", s:{C:2}},
+      {t:"Balance a strong floor with room to rise.", reveals:"fairness and growth", s:{J:1,C:1}},
+    ]
+  },
+  {
+    name:"The Sheriff's Dilemma",
+    source:"H. J. McCloskey, 1957",
+    text:"A town is on the brink of a riot that will kill many. The mob will be satisfied only if a culprit is punished. You are the sheriff. You know the real offender escaped — but you could frame and execute an innocent drifter to stop the bloodshed.",
+    sub:"Do you frame the innocent man?",
+    probe:"The classic objection to utilitarianism: if outcomes are everything, justice itself becomes negotiable. Where do you stand?",
+    options:[
+      {t:"Frame him. One life is a tragic price to stop many deaths.", reveals:"the ends can justify it", s:{C:2}},
+      {t:"Refuse. Punishing the innocent is a line you never cross.", reveals:"justice is not for sale", s:{D:2,J:1}},
+    ]
+  },
+  {
+    name:"Heinz Steals the Drug",
+    source:"Lawrence Kohlberg, 1958",
+    text:"Heinz's wife is dying. A pharmacist has the one drug that can save her but charges ten times what it costs to make — far more than Heinz can pay or borrow. Desperate, Heinz considers breaking in to steal it.",
+    sub:"Should he steal the drug?",
+    probe:"Kohlberg used this to map moral reasoning. It pits law and property against love and life — and asks which rule you'd break, and why.",
+    options:[
+      {t:"Steal it. A life outweighs property and a price-gouger's profit.", reveals:"life above law", s:{C:1,J:1}},
+      {t:"Don't steal. Theft is wrong; he must find a lawful way.", reveals:"the rule still binds", s:{D:2}},
+      {t:"Steal it as a last resort — then accept the legal consequences.", reveals:"break the rule, honour it", s:{C:1,D:1}},
+    ]
+  },
+  {
+    name:"The Utility Monster",
+    source:"Robert Nozick, 1974",
+    text:"Imagine a being that gets enormously more pleasure from resources than anyone else — a slice of bread brings it more joy than a feast brings you. Strict 'greatest happiness' math says we should feed it almost everything, leaving everyone else with scraps.",
+    sub:"Do you give the monster the resources?",
+    probe:"Nozick's reductio: maximizing total happiness can swallow every individual. It tests whether each person's claim has weight the sums can't override.",
+    options:[
+      {t:"Give it the resources. Total happiness is what we're maximizing.", reveals:"follow the sum", s:{C:2}},
+      {t:"No. No one's appetite entitles them to everyone else's share.", reveals:"individuals can't be sacrificed to a total", s:{J:2,D:1}},
+    ]
+  },
+  {
+    name:"The Last Man",
+    source:"Richard Routley, 1973",
+    text:"You are the last human being alive; everyone else is gone and you will soon die. With your final hours you could, for no reason at all, set fire to the last great forest — every tree, every creature in it.",
+    sub:"Would that be wrong?",
+    probe:"With no humans left to be harmed, a strict 'value comes from people' view says nothing is lost. Your answer reveals whether nature — or beauty, or being itself — has worth on its own.",
+    options:[
+      {t:"Yes, it's wrong. The living world has worth beyond any human use.", reveals:"intrinsic worth in things", s:{Id:2}},
+      {t:"No wrong is done — value needs a mind left to be harmed.", reveals:"value is human-made", s:{C:1}},
+      {t:"It feels wrong, though I'd struggle to say who is harmed.", reveals:"an uneasy intuition", s:{Id:1}},
+    ]
+  },
+  {
+    name:"The Violinist",
+    source:"Judith Jarvis Thomson, 1971",
+    text:"You wake to find a famous violinist plugged into your body. He has a fatal illness; only your kidneys can filter his blood. A society of music-lovers attached him to you while you slept. Unplug him and he dies — but stay connected and you're bedbound for nine months.",
+    sub:"May you unplug yourself?",
+    probe:"A landmark test of bodily autonomy against the right to life: does another's need to use your body create a duty you never agreed to?",
+    options:[
+      {t:"You may unplug. No one can be conscripted as another's life-support.", reveals:"autonomy over the body", s:{D:2}},
+      {t:"You must stay connected. A life now depends on you.", reveals:"the duty to preserve life", s:{C:1,Id:1}},
+      {t:"Nine months is bearable, so stay — but a longer term would change it.", reveals:"duty within limits", s:{D:1}},
+    ]
+  },
+];
+
+/* ---------- framework definitions ---------- */
+const FRAMEWORKS = {
+  C:{ key:"C", name:"The Consequentialist", colour:"var(--c-cons)",
+      label:"Consequentialism", short:"outcomes &amp; the greater good",
+      blurb:"You judge an act by what it brings about. Suffering reduced, lives saved, happiness multiplied — these are the true currency of right and wrong, and a good result can justify a hard choice. Rules are useful servants, not sacred masters.",
+      kin:"Kindred spirits: Jeremy Bentham, John Stuart Mill, Peter Singer." },
+  D:{ key:"D", name:"The Deontologist", colour:"var(--c-deon)",
+      label:"Deontology", short:"duties, rights &amp; lines you won't cross",
+      blurb:"For you, some things are simply off-limits, no matter how the numbers fall. People are ends in themselves, never mere tools; a duty is a duty even when breaking it would pay. You'd rather keep your hands clean than buy a better outcome with a wrong.",
+      kin:"Kindred spirit: Immanuel Kant." },
+  J:{ key:"J", name:"The Contractarian", colour:"var(--c-just)",
+      label:"Justice &amp; Fairness", short:"the rules we could all accept",
+      blurb:"Your lodestar is fairness — the arrangement that every person could reasonably agree to, especially the ones who drew the shortest straw. You're suspicious of trade-offs that quietly sacrifice the few, and you measure a society by how it treats its weakest.",
+      kin:"Kindred spirits: John Rawls, T. M. Scanlon." },
+  Id:{ key:"Id", name:"The Idealist", colour:"var(--c-ideal)",
+      label:"Virtue &amp; Intrinsic Worth", short:"truth, character &amp; things good in themselves",
+      blurb:"You believe some things matter for their own sake — truth over comfortable illusion, virtue whether or not anyone is watching, beauty and life that need no human to justify them. Morality, for you, is about what kind of person and world is genuinely good.",
+      kin:"Kindred spirits: Plato, Aristotle." },
+  E:{ key:"E", name:"The Free Agent", colour:"var(--c-ego)",
+      label:"Self-Direction", short:"your own judgment over inherited rules",
+      blurb:"You're wary of grand moral systems handed down from on high. You trust your own reasoning, weigh real costs and benefits to the people involved (yourself included), and you're honest about self-interest where others pretend it away. Authenticity beats performance.",
+      kin:"Kindred spirits: the egoist tradition — from Glaucon's challenge to Hobbes and Stirner." },
+};
+const AXIS_ORDER = ["C","D","J","Id","E"];
+
+/* ============================================================
+   STATE + ENGINE
+   ============================================================ */
+let answers = new Array(QUESTIONS.length).fill(null);
+let cur = 0;
+
+const $ = id => document.getElementById(id);
+
+function start(){
+  $("intro").classList.add("hidden");
+  $("results").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  answers = new Array(QUESTIONS.length).fill(null);
+  cur = 0;
+  render();
+  window.scrollTo({top:0});
+}
+
+function render(){
+  const q = QUESTIONS[cur];
+  $("fill").style.width = ((cur)/QUESTIONS.length*100) + "%";
+  $("qcount").textContent = `Question ${cur+1} of ${QUESTIONS.length}`;
+  $("qtheme").textContent = q.source;
+  $("backBtn").style.visibility = cur === 0 ? "hidden" : "visible";
+
+  const host = $("cardHost");
+  host.innerHTML = `
+    <div class="card">
+      <div class="q-name">${q.name}</div>
+      <div class="q-text serif">${q.text}</div>
+      <div class="q-sub">${q.sub}</div>
+      <div class="options">
+        ${q.options.map((o,i)=>`
+          <button class="opt ${answers[cur]===i?'sel':''}" onclick="choose(${i})">
+            <span class="key">${i+1}</span>${o.t}
+          </button>`).join("")}
+      </div>
+    </div>`;
+}
+
+function choose(i){
+  answers[cur] = i;
+  // brief highlight, then advance
+  render();
+  setTimeout(()=>{
+    if(cur < QUESTIONS.length-1){ cur++; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+    else { finish(); }
+  }, 180);
+}
+
+function back(){
+  if(cur>0){ cur--; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+}
+
+document.addEventListener("keydown", e=>{
+  if($("quiz").classList.contains("hidden")) return;
+  const q = QUESTIONS[cur];
+  if(["1","2","3","4"].includes(e.key)){
+    const i = parseInt(e.key)-1;
+    if(i < q.options.length) choose(i);
+  } else if(e.key === "ArrowLeft"){ back(); }
+});
+
+/* ---------- scoring ---------- */
+function tally(){
+  const earned = {C:0,D:0,J:0,Id:0,E:0};
+  const max    = {C:0,D:0,J:0,Id:0,E:0};
+  QUESTIONS.forEach((q,qi)=>{
+    // denominator: best any option could give this axis on this question
+    AXIS_ORDER.forEach(a=>{
+      const best = Math.max(0, ...q.options.map(o=>o.s[a]||0));
+      max[a] += best;
+    });
+    const chosen = q.options[answers[qi]];
+    if(chosen) AXIS_ORDER.forEach(a=> earned[a] += (chosen.s[a]||0));
+  });
+  const pct = {};
+  AXIS_ORDER.forEach(a=> pct[a] = max[a] ? Math.round(earned[a]/max[a]*100) : 0);
+  return pct;
+}
+
+function finish(){
+  $("fill").style.width = "100%";
+  const pct = tally();
+  const ranked = [...AXIS_ORDER].sort((a,b)=>pct[b]-pct[a]);
+  const top = ranked[0], second = ranked[1];
+  const f = FRAMEWORKS[top];
+  const blended = (pct[top]-pct[second] <= 12) && pct[second] >= 25;
+
+  let headline, sub;
+  if(blended){
+    headline = `${f.name}, with a strong ${FRAMEWORKS[second].name.replace('The ','').toLowerCase()} streak`;
+    sub = `Your instincts don't bow to a single system. They sit between <b>${f.label}</b> and <b>${FRAMEWORKS[second].label}</b> — the mark of a moral pluralist, who weighs competing duties case by case rather than trusting one rule to govern all. (Kindred spirit: W. D. Ross.)`;
+  } else {
+    headline = f.name;
+    sub = f.blurb;
+  }
+
+  // bars
+  const bars = AXIS_ORDER.map(a=>{
+    const fr = FRAMEWORKS[a];
+    return `<div class="barrow">
+      <div class="top">
+        <div class="nm">${fr.label}<small>${fr.short}</small></div>
+        <div class="pct">${pct[a]}%</div>
+      </div>
+      <div class="track"><div class="val" data-w="${pct[a]}" style="background:${fr.colour}"></div></div>
+    </div>`;
+  }).join("");
+
+  // recap
+  const recap = QUESTIONS.map((q,qi)=>{
+    const ch = q.options[answers[qi]];
+    return `<div class="item">
+      <div class="h">${q.name}</div>
+      <div class="probe">${q.probe}</div>
+      <div class="you"><span class="tag">You:</span><span>${ch ? ch.t + ` <span style="color:var(--faint)">— ${ch.reveals}</span>` : "—"}</span></div>
+    </div>`;
+  }).join("");
+
+  $("results").innerHTML = `
+    <div class="result-head">
+      <div class="kicker">Your Moral Compass</div>
+      <h2 class="archetype">${headline}</h2>
+      <div class="archetype"><small>${sub}</small></div>
+      ${blended ? "" : `<div class="kin">${f.kin}</div>`}
+    </div>
+
+    <div class="section-title">Where your instincts fall</div>
+    <div class="bars">${bars}</div>
+
+    <div class="section-title">How you answered, dilemma by dilemma</div>
+    <div class="recap">${recap}</div>
+
+    <div class="footer-actions">
+      <button class="btn" onclick="start()">Retake the test</button>
+      <button class="btn ghost" onclick="toIntro()">Back to start</button>
+    </div>
+    <p class="disclaim">This is a reflective exercise drawn from classic philosophy, not a clinical or definitive judgment of character. The "frameworks" are simplified maps of vast traditions — real ethical thinking lives in the tensions between them. The thought experiments belong to Foot, Thomson, Nozick, Plato, Singer, Rawls, McCloskey, Kohlberg and Routley.</p>
+  `;
+
+  $("quiz").classList.add("hidden");
+  $("results").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+
+  // animate bars after paint
+  requestAnimationFrame(()=> setTimeout(()=>{
+    document.querySelectorAll(".val").forEach(el=> el.style.width = el.dataset.w + "%");
+  }, 60));
+}
+
+function toIntro(){
+  $("results").classList.add("hidden");
+  $("quiz").classList.add("hidden");
+  $("intro").classList.remove("hidden");
+  window.scrollTo({top:0});
+}
+</script>
+</body>
+</html>
