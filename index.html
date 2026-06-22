@@ -389,18 +389,24 @@ function render(){
     </div>`;
 }
 
+let locked = false;
 function choose(i){
+  if(locked) return;
+  locked = true;
   answers[cur] = i;
-  // brief highlight, then advance
-  render();
+  // highlight the chosen option IN PLACE — no full re-render, so the card
+  // doesn't flash / replay its entrance animation. Then advance once.
+  document.querySelectorAll(".opt").forEach((el,idx)=> el.classList.toggle("sel", idx===i));
   setTimeout(()=>{
-    if(cur < QUESTIONS.length-1){ cur++; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+    locked = false;
+    if(cur < QUESTIONS.length-1){ cur++; window.scrollTo({top:0}); render(); }
     else { finish(); }
-  }, 180);
+  }, 220);
 }
 
 function back(){
-  if(cur>0){ cur--; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+  if(locked) return;
+  if(cur>0){ cur--; window.scrollTo({top:0}); render(); }
 }
 
 document.addEventListener("keydown", e=>{
