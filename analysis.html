@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Deontologist — A Moral Compass Result, Read Against the World</title>
+<meta name="description" content="A personal Moral Compass result analysed against empirical moral-psychology research: where these instincts sit among the world's population.">
+<meta property="og:title" content="The Deontologist — A Moral Compass Result">
+<meta property="og:description" content="One person's answers to twelve classic thought experiments, measured against how tens of thousands of people across many studies actually respond.">
+<style>
+  :root{
+    --bg:#14110f; --surface:#1e1a17; --surface-2:#26211d; --line:#3a332d;
+    --text:#ece6dd; --muted:#a89f93; --faint:#938a7d;
+    --accent:#e3b15a; --accent-soft:#d9a441;
+    --c-cons:#e08a3c; --c-deon:#5b8dd6; --c-just:#5cb88a; --c-ideal:#b07cd6; --c-ego:#d96c6c;
+    --maj:#5cb88a; --min:#e0833c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:radial-gradient(120% 90% at 50% 0%, #1a1613 0%, var(--bg) 55%);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    line-height:1.7; -webkit-font-smoothing:antialiased;
+    padding:30px 18px 90px;
+  }
+  .wrap{max-width:720px;margin:0 auto}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;line-height:1.25}
+  .serif{font-family:Georgia,"Times New Roman",serif}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* hero */
+  .kicker{letter-spacing:.28em;text-transform:uppercase;font-size:12px;color:var(--accent);text-align:center}
+  .hero{text-align:center;padding:30px 4px 6px}
+  .hero h1{font-size:40px;letter-spacing:.4px;margin-top:16px}
+  .hero .byline{color:var(--faint);font-size:13px;margin-top:16px;letter-spacing:.04em}
+  .hero p.lede{color:var(--muted);font-size:17px;max-width:560px;margin:20px auto 0}
+  .kin{color:var(--accent);font-size:14px;margin-top:16px}
+
+  .toolbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
+  .btn{display:inline-flex;align-items:center;gap:7px;border:none;cursor:pointer;font:inherit;
+    background:var(--accent);color:#1a130a;font-weight:600;padding:11px 22px;border-radius:999px;font-size:15px;
+    transition:transform .12s ease,background .12s ease;text-decoration:none}
+  .btn:hover{transform:translateY(-1px);background:#eec072;text-decoration:none}
+  .btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);font-weight:500}
+  .btn.ghost:hover{color:var(--text);background:var(--surface-2)}
+
+  .section-title{font-family:inherit;font-weight:600;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);
+    margin:54px 0 18px;border-bottom:1px solid var(--line);padding-bottom:10px}
+
+  /* framework bars */
+  .bars{display:flex;flex-direction:column;gap:16px}
+  .barrow .top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .barrow .nm{font-weight:600;font-size:15px}
+  .barrow .nm small{display:block;font-weight:400;color:var(--faint);font-size:12.5px;margin-top:2px}
+  .barrow .pct{font-family:Georgia,serif;font-size:16px}
+  .barrow .track{height:9px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+  .barrow .val{height:100%;border-radius:99px;transition:width 1s cubic-bezier(.22,.8,.3,1)}
+
+  /* you vs world */
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin:-4px 0 20px}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .vw{display:flex;flex-direction:column;gap:13px}
+  .vwrow .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:5px}
+  .vwrow .nm{font-size:14.5px}
+  .vwrow .nm b{font-weight:600}
+  .vwrow .nm small{color:var(--faint);font-size:12.5px}
+  .vwrow .pct{font-family:Georgia,serif;font-size:15px;white-space:nowrap}
+  .vwrow .track{height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden}
+  .vwrow .val{height:100%;border-radius:99px;transition:width .9s cubic-bezier(.22,.8,.3,1)}
+
+  /* prose */
+  .prose p{margin:0 0 16px;font-size:16.5px}
+  .prose h3{font-size:21px;margin:30px 0 10px}
+  .prose .pull{border-left:3px solid var(--accent);padding:4px 0 4px 18px;margin:22px 0;color:var(--text);
+    font-family:Georgia,serif;font-size:19px;line-height:1.5}
+  .verdict{background:linear-gradient(180deg,var(--surface) 0%, #1a1714 100%);border:1px solid var(--line);
+    border-radius:16px;padding:24px 26px;margin-top:26px}
+  .verdict .lab{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  .verdict p{font-family:Georgia,serif;font-size:19px;line-height:1.5;margin:0}
+
+  /* sources */
+  .src{display:flex;flex-direction:column;gap:11px}
+  .src .item{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 16px;font-size:14px}
+  .src .item .a{font-weight:600}
+  .src .item a{text-decoration:underline;text-underline-offset:2px}
+  .src .item .d{color:var(--muted);font-size:13px;margin-top:2px}
+
+  .foot{color:var(--faint);font-size:12.5px;text-align:center;margin-top:46px;line-height:1.65;max-width:560px;margin-left:auto;margin-right:auto}
+  .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:var(--accent);color:#1a130a;font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;
+    transition:opacity .25s,transform .25s;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media (max-width:480px){
+    .hero h1{font-size:30px}
+    .prose p{font-size:16px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">The Moral Compass · Personal Analysis</div>
+  <div class="hero">
+    <p class="sr-only">Result: primarily deontological with a strong idealist streak. Agrees with the global majority on eight of twelve classic moral dilemmas; the clear outlier is the trolley problem.</p>
+    <h1>The Deontologist,<br>with a strong Idealist streak</h1>
+    <div class="byline">A result for Vishwanath · read against the world's data · 22 June 2026</div>
+    <p class="lede">Twelve classic thought experiments, answered honestly — then measured against how tens of thousands of people actually respond. Here is what the answers reveal, and where they sit among the world's population.</p>
+    <div class="kin">Kindred spirit in the blend: W. D. Ross — the moral pluralist who weighs competing duties case by case.</div>
+  </div>
+
+  <div class="toolbar">
+    <button class="btn" onclick="copyLink()">Copy share link</button>
+    <a class="btn ghost" href="index.html">Take the test →</a>
+  </div>
+
+  <!-- ===== Profile ===== -->
+  <h2 class="section-title">The profile — where the instincts fall</h2>
+  <div class="bars" id="frameworks"></div>
+
+  <!-- ===== You vs world ===== -->
+  <h2 class="section-title">You vs. the world — the share who answer like you</h2>
+  <div class="legend">
+    <span><i style="background:var(--maj)"></i> You're with the majority</span>
+    <span><i style="background:var(--min)"></i> You're in the minority</span>
+  </div>
+  <p style="font-size:12.5px;color:var(--faint);margin:-6px 0 18px;line-height:1.55">Where a dilemma has been measured directly — the trolley, footbridge, transplant, the machine, nature — the bar reflects that research. Where it hasn't — the sheriff, the monster, the violinist — it's a reasoned estimate from related findings, not a single survey.</p>
+  <div class="vw" id="vsworld"></div>
+
+  <!-- ===== Analysis ===== -->
+  <h2 class="section-title">The reading</h2>
+  <div class="prose" id="prose"></div>
+
+  <!-- ===== Sources ===== -->
+  <h2 class="section-title">The evidence — a short reading list</h2>
+  <div class="src" id="sources"></div>
+
+  <p class="foot">This is a reflective exercise drawn from classic philosophy and empirical moral psychology — not a clinical or definitive judgment of character. Percentages are best estimates from the cited studies; methods and samples vary, and several findings are actively debated. The thought experiments belong to Foot, Thomson, Nozick, Plato, Singer, Rawls, McCloskey, Kohlberg and Routley.</p>
+
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Link copied</div>
+
+<script>
+/* ---- the profile (from the result) ---- */
+const FRAMEWORKS = [
+  {k:"Deontology", s:93, c:"var(--c-deon)", d:"duties, rights &amp; lines you won't cross"},
+  {k:"Virtue &amp; Intrinsic Worth", s:86, c:"var(--c-ideal)", d:"truth, character &amp; things good in themselves"},
+  {k:"Justice &amp; Fairness", s:63, c:"var(--c-just)", d:"the rules we could all accept"},
+  {k:"Self-Direction", s:20, c:"var(--c-ego)", d:"your own judgment over inherited rules"},
+  {k:"Consequentialism", s:12, c:"var(--c-cons)", d:"outcomes &amp; the greater good"},
+];
+
+/* ---- you vs world: % of people who answer the same way ---- */
+const VS = [
+  {n:"Transplant Surgeon", you:"never harvest the one", pct:97},
+  {n:"Drowning Child", you:"distance can limit the duty", pct:90},
+  {n:"The Sheriff", you:"won't frame the innocent", pct:87},
+  {n:"Utility Monster", you:"won't sacrifice the few to a total", pct:82},
+  {n:"The Last Man", you:"nature has worth of its own", pct:82},
+  {n:"The Footbridge", you:"won't push the man", pct:85},
+  {n:"Experience Machine", you:"stay in reality", pct:78},
+  {n:"The Violinist", you:"bodily autonomy comes first", pct:55},
+  {n:"Veil of Ignorance", you:"a strong floor plus room to rise", pct:45},
+  {n:"Ring of Gyges", you:"act the same unwatched*", pct:35},
+  {n:"Heinz's Dilemma", you:"steal, but accept the law", pct:30},
+  {n:"The Trolley", you:"won't pull the lever", pct:15},
+];
+
+/* ---- the reading (prose) ---- */
+const PROSE = `
+<p>The striking thing is how <b>ordinary</b> most of this is. On eight of your twelve answers you side with the outright majority. Refusing to harvest a healthy patient's organs (~97% agree), not pushing the man off the footbridge (~70–90% agree), keeping reality over a machine of perfect illusion (~71–84% decline the machine) — these are the <em>common</em> human responses. So is your drowning-child answer: in practice, people's behaviour broadly treats distance as limiting the duty — though that's Singer's normative point more than a single measured figure. Even your veil-of-ignorance choice — a strong floor <em>plus</em> room to rise — is the single most popular option when researchers actually run that experiment on people. On three answers — the veil, the ring, and Heinz — you sit in a minority, but a sizeable one. On only <em>one</em> are you a true outlier.</p>
+
+<h3>The one place you genuinely diverge</h3>
+<p>It's the trolley. Across the large datasets, roughly <b>80–90% of people pull the lever</b> in the switch case — saving five at the cost of one feels like plain common sense to most. You are in the <b>~10–20% minority who won't.</b> That is the signature of your profile: you are deontological not only where almost everyone is (the up-close footbridge), but <em>even where most people let the numbers win.</em> You won't be the agent of a death to engineer a better outcome — and that's a more thoroughgoing rule-ethic than the average person carries.</p>
+<p class="pull">Most people pull the lever, refuse to push the man, and can't explain the difference. You apply one principle across both — and across the surgeon, the sheriff and the monster too.</p>
+<p>That consistency is itself rare. The gap between pulling the lever and pushing the man — a 54-to-78-point swing in the same people — is the most replicated finding in moral psychology, and it exists precisely <em>because</em> most people aren't consistent. You are. Whether or not one agrees with the principle, that puts you closer to a worked-out moral philosophy than to gut reaction.</p>
+
+<h3>So — how good or bad is it?</h3>
+<p>There's no scientific "good score." But two real findings let me give an honest, non-flattering read.</p>
+<p><b>The reassuring half.</b> The profile that is the <em>opposite</em> of yours — eagerly endorsing "instrumental harm," sacrificing individuals for the total — is the one that correlates with subclinical psychopathy and Machiavellianism (Bartels &amp; Pizarro, 2011). Your harm-averse, norm-respecting pattern clusters with the <em>other</em> traits: empathy, perspective-taking, moral identity. By the crude test of "which profile do cold, antisocial people tend to have," yours is firmly the warm, prosocial one. Your very low 12% on consequentialism is, in this light, not a deficit.</p>
+<p><b>The honest counterweight.</b> A committed consequentialist would push back on your two distinctive answers. Refusing the lever, they'd say, values <em>your own clean hands</em> over five real lives — moral purity bought with other people's deaths. And your drowning-child answer is exactly the comfortable sense of distance that Peter Singer argues is a genuine failing, not a neutral preference. In the research, "impartial beneficence" — caring about distant strangers and future generations — is the one utilitarian dimension that is straightforwardly prosocial, and it's the dimension your profile is lightest on.</p>
+<p>So the fair summary: <b>deeply principled and warm up close, less expansive toward strangers far away.</b> Which of those a philosopher grades as "better" depends entirely on whether they're Kant or Singer — and they've argued about it for two hundred years.</p>
+
+<h3>One asterisk — the Ring of Gyges</h3>
+<p>This is the answer to hold most loosely. You said you'd behave identically whether or not anyone could see. <em>Almost everyone believes that of themselves</em> — but the behavioural data is blunt: under true anonymity, the share of people who give nothing in economic games jumps sharply versus when they can be observed, and even photos of "watching eyes" measurably reduce bad behaviour. So claiming the invisible, unaccountable version of you is the same person is not the common answer — it's the rare, aspirational one. Worth treating as a standard to live up to rather than a settled fact.</p>
+`;
+
+/* ---- sources ---- */
+const SOURCES = [
+  {a:"Awad et al. (2020) — “Universals and variations in moral decisions made in 42 countries by 70,000 participants”", d:"PNAS. The Moral Machine / trolley study at global scale.", u:"https://www.pnas.org/doi/10.1073/pnas.1911517117"},
+  {a:"Hauser, Cushman, Young, Jin & Mikhail (2007) — “A dissociation between moral judgments and justifications”", d:"Mind & Language. The Moral Sense Test (switch ~89%, footbridge ~11%). The ~97% transplant figure is from Hauser's larger online Moral Sense Test (~150,000 respondents), not this peer-reviewed paper.", u:"https://doi.org/10.1111/j.1468-0017.2006.00297.x"},
+  {a:"Klein et al. (2018) — “Many Labs 2”", d:"Advances in Methods and Practices in Psychological Science. Large multi-site replication that included the trolley/footbridge dilemma items.", u:"https://journals.sagepub.com/doi/full/10.1177/2515245918810225"},
+  {a:"Greene, Sommerville, Nystrom, Darley & Cohen (2001)", d:"Science. The fMRI dual-process origin of the personal/impersonal distinction.", u:"https://www.science.org/doi/10.1126/science.1062872"},
+  {a:"Weijers (2014) — “Nozick's experience machine is dead, long live the experience machine!”", d:"Philosophical Psychology. ~84% decline the machine.", u:"https://www.tandfonline.com/doi/abs/10.1080/09515089.2012.757889"},
+  {a:"De Brigard (2010) — “If you like it, does it matter if it's real?”", d:"Philosophical Psychology. The status-quo-bias reversal of the experience machine.", u:"https://people.duke.edu/~fd13/2010/De_Brigard_2010_PhilPsych.pdf"},
+  {a:"Hoffman, McCabe, Shachat & Smith (1994) — “Preferences, property rights, and anonymity in bargaining games”", d:"Games and Economic Behavior. Under true double-blind anonymity, most dictators give nothing — being observed sharply raises giving.", u:"https://doi.org/10.1006/game.1994.1056"},
+  {a:"Dear, Dutton & Fox (2019) — “Do ‘watching eyes’ influence antisocial behavior?”", d:"Evolution and Human Behavior. Meta-analysis: watching-eyes cues cut antisocial behaviour (~35%), with little effect on generosity.", u:"https://www.sciencedirect.com/science/article/abs/pii/S1090513818303490"},
+  {a:"Giving USA (2025) — Annual Report on Philanthropy", d:"Indiana University Lilly Family School of Philanthropy. US giving has held near ~2% of disposable income (recently ~1.8%); only ~6% of donated dollars go to international causes.", u:"https://givingusa.org/"},
+  {a:"Vucetich, Bruskotter & Nelson (2015) — intrinsic value of nature", d:"Conservation Biology. In a survey of ~2,700 Ohio households, ~82% (75–87% across subgroups) agreed wildlife has worth beyond its use to people.", u:"https://conbio.onlinelibrary.wiley.com/doi/10.1111/cobi.12464"},
+  {a:"Bartels & Pizarro (2011) — “The mismeasure of morals”", d:"Cognition. Sacrificial ‘utilitarian’ answers predict psychopathy & Machiavellianism.", u:"https://pubmed.ncbi.nlm.nih.gov/21757191/"},
+  {a:"Kahane, Everett, Earp et al. (2018) — “Beyond sacrificial harm” (Oxford Utilitarianism Scale)", d:"Psychological Review. Instrumental Harm vs Impartial Beneficence; consistent utilitarians are rare.", u:"https://pubmed.ncbi.nlm.nih.gov/29265854/"},
+  {a:"Conway & Gawronski (2013) — process dissociation of moral judgment", d:"Journal of Personality and Social Psychology. Deontological inclinations track empathic concern.", u:"https://pubmed.ncbi.nlm.nih.gov/23276267/"},
+  {a:"Frohlich, Oppenheimer & Eavey (1987) — laboratory tests of Rawls", d:"British Journal of Political Science. Behind the veil, people choose a floor-plus-average hybrid, not pure maximin.", u:"https://doi.org/10.1017/S0007123400004580"},
+  {a:"Huang, Greene & Bazerman (2019) — “Veil-of-ignorance reasoning favors the greater good”", d:"PNAS. Seven experiments (~6,261 participants): reasoning behind the veil shifts people toward the greater good.", u:"https://doi.org/10.1073/pnas.1910125116"},
+];
+
+/* ---- render ---- */
+function el(html){const t=document.createElement("template");t.innerHTML=html.trim();return t.content.firstChild;}
+
+const fh = document.getElementById("frameworks");
+FRAMEWORKS.forEach(f=>{
+  fh.appendChild(el(`<div class="barrow">
+    <div class="top"><div class="nm">${f.k}<small>${f.d}</small></div><div class="pct" style="color:${f.c}">${f.s}%</div></div>
+    <div class="track"><div class="val" data-w="${f.s}" style="background:${f.c}"></div></div></div>`));
+});
+
+const vh = document.getElementById("vsworld");
+VS.forEach(v=>{
+  const col = v.pct>=50 ? "var(--maj)" : "var(--min)";
+  vh.appendChild(el(`<div class="vwrow">
+    <div class="top"><div class="nm"><b>${v.n}</b> <small>— you: ${v.you}</small></div><div class="pct" style="color:${col}">${v.pct}%</div></div>
+    <div class="track"><div class="val" data-w="${v.pct}" style="background:${col}"></div></div></div>`));
+});
+
+document.getElementById("prose").innerHTML = PROSE;
+
+const sh = document.getElementById("sources");
+SOURCES.forEach(s=>{
+  sh.appendChild(el(`<div class="item"><div class="a"><a href="${s.u}" target="_blank" rel="noopener">${s.a}</a></div><div class="d">${s.d}</div></div>`));
+});
+
+/* animate bars in */
+requestAnimationFrame(()=>setTimeout(()=>{
+  document.querySelectorAll(".val").forEach(e=> e.style.width = e.dataset.w + "%");
+},80));
+
+/* share */
+function copyLink(){
+  const url = window.location.href;
+  const done = ()=>{const t=document.getElementById("toast");t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1600);};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(done).catch(done);}
+  else{const i=document.createElement("input");i.value=url;document.body.appendChild(i);i.select();try{document.execCommand("copy")}catch(e){}i.remove();done();}
+}
+</script>
+</body>
+</html>
